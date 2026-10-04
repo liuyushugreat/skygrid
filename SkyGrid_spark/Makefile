@@ -1,8 +1,8 @@
-.PHONY: all main multiseed ablation scaling fault validation pipeline-stress placement-stress dag-variants figures paper-figs test
+.PHONY: all main multiseed ablation scaling scaling-paper fault validation pipeline-stress placement-stress dag-variants figures paper-figs test
 
 PYTHON ?= python
 
-all: main multiseed ablation scaling fault validation pipeline-stress placement-stress dag-variants figures
+all: main multiseed ablation scaling scaling-paper fault validation pipeline-stress placement-stress dag-variants figures
 
 # Sec. V-F "Other DAG Structures": two structural DAG variants, 3 seeds.
 dag-variants:
@@ -23,6 +23,14 @@ ablation:
 
 scaling:
 	$(PYTHON) scripts/run_scaling.py --config configs/scaling.yaml --output outputs/scaling/scaling.json
+
+# Sec. V-C / Fig. 3: weak sweep at the M density + strong sweep at 10K, 60 s.
+scaling-paper:
+	$(PYTHON) scripts/run_scaling.py --config configs/default.yaml --scaling configs/scaling_paper.yaml --output outputs/scaling/scaling_paper.json
+
+# Sec. V-C / Fig. 3: weak sweep at the M density + strong sweep at 10K, 60 s.
+scaling-paper:
+	$(PYTHON) scripts/run_scaling.py --config configs/default.yaml --scaling configs/scaling_paper.yaml --output outputs/scaling/scaling_paper.json
 
 fault:
 	$(PYTHON) scripts/run_fault.py --config configs/default.yaml --out outputs/fault/fault.json

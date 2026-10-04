@@ -59,6 +59,9 @@ class SkyGridRuntime:
         self.cfg = cfg
         self.runtime_cfg = runtime_cfg or RuntimeConfig()
         self.dag = TaskDAG.from_config(cfg.dag)
+        if cfg.dag.join not in ("first", "all"):
+            raise ValueError(f"dag.join must be 'first' or 'all', got {cfg.dag.join!r}")
+        self._join_all = cfg.dag.join == "all"
         self.fabric = Fabric(cfg.fabric, seed=cfg.seed)
         self.cost_model = CostModel(cfg.fabric)
         # Capacity weights derived from per-edge TFLOPS (falls back to
@@ -309,9 +312,16 @@ class SkyGridRuntime:
                     # event so the bookkeeping is O(1) and process-local.
                     triggered: set[str] = getattr(ev, "_triggered_ops", None) or set()
                     ev._triggered_ops = triggered  # type: ignore[attr-defined]
+                    done: set[str] = getattr(ev, "_done_ops", None) or set()
+                    done.add(pb.op_name)
+                    ev._done_ops = done  # type: ignore[attr-defined]
                     for child in children:
                         if child in triggered:
                             continue
+                        if self._join_all and not all(
+                            p in done for p in self.dag.parents(child)
+                        ):
+                            continue  # AND-join: wait for remaining parents
                         triggered.add(child)
                         child_op = self.dag.by_name[child]
                         site = self._site_for(ev, child_op)

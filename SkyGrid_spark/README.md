@@ -32,14 +32,13 @@ End-to-end, SkyGrid delivers:
   moves across the whole 60 s window.
 - Deterministic and CPU-only: one seed reproduces every number.
 
-Full details and the evaluation tables are in the paper sibling directory
-[`../../skygrid_spark.tex`](../../skygrid_spark.tex) (this file lives inside
-the standalone `SkygridCode/` artifact bundle).
+Full details and the evaluation tables are in the IEEE HPCC 2026 paper at
+[`pressRequire/SkyGrid_spark/skygrid_spark.tex`](../../../pressRequire/SkyGrid_spark/skygrid_spark.tex).
 
 ## Repository layout
 
 ```
-SkyGrid_spark/                # (this directory; part of SkygridCode/)
+modules/SkyGrid_spark/
 ├── configs/                  # YAML configs (default / ablation / scaling)
 ├── scripts/
 │   ├── run_experiment.py     # main Table-1 runs (7 configs, batched)
@@ -59,8 +58,6 @@ SkyGrid_spark/                # (this directory; part of SkygridCode/)
 └── outputs/                  # metrics.json + ablation/ + scaling/ + figs/
 ```
 
-Companion edge-unit simulator: [`../SparkEdgeSim/`](../SparkEdgeSim/).
-
 ## One-click reproduction
 
 The artifact is pure Python + NumPy.  No GPU, no network, no API keys.
@@ -68,7 +65,7 @@ The artifact is pure Python + NumPy.  No GPU, no network, no API keys.
 ### 1. Install
 
 ```bash
-cd SkyGrid_spark
+cd modules/SkyGrid_spark
 python -m pip install -r requirements.txt
 python -m pip install -e .
 ```
@@ -89,9 +86,15 @@ python scripts/run_multiseed.py --config configs/default.yaml \
 python scripts/run_ablation.py --config configs/default.yaml \
     --output outputs/ablation/ablation.json
 
-# Scaling (weak / strong / entity)
+# Scaling (weak / strong / entity) -- exploratory 10 s sweep
 python scripts/run_scaling.py --config configs/scaling.yaml \
     --output outputs/scaling/scaling.json
+
+# Scaling as reported in the paper (Fig. 3): weak sweep at the M density
+# (2.5K entities per edge), strong sweep at 10K entities, 60 s, seed 20260928
+python scripts/run_scaling.py --config configs/default.yaml \
+    --scaling configs/scaling_paper.yaml \
+    --output outputs/scaling/scaling_paper.json
 
 # Fault/degradation and cost-model validation
 python scripts/run_fault.py --config configs/default.yaml \

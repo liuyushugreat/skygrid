@@ -1,0 +1,11 @@
+[scaling/weak] weak_2500_1                    tput=3975.2ops/s
+[scaling/weak] weak_5000_2                    tput=6187.9ops/s
+[scaling/weak] weak_10000_4                   tput=12162.5ops/s
+[scaling/weak] weak_20000_8                   tput=31301.4ops/s
+[scaling/weak] weak_40000_16                  tput=61110.7ops/s
+[scaling/strong] strong_1                       tput=12165.7ops/s
+[scaling/strong] strong_2                       tput=12165.0ops/s
+[scaling/strong] strong_4                       tput=12162.5ops/s
+[scaling/strong] strong_8                       tput=12156.7ops/s
+[scaling/strong] strong_16                      tput=12153.1ops/s
+[scaling] wrote /Users/liuyushu/Downloads/同步空间/SCI/SKYPAPER/SkyNetUamPlatform/modules/SkyGrid_spark/outputs/scaling/scaling_paper.json

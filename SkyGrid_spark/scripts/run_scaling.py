@@ -73,7 +73,7 @@ def main() -> int:
               flush=True)
         results["strong"].append(r)
 
-    ent = sc["sweeps"]["entity_scale"]
+    ent = sc["sweeps"].get("entity_scale") or {"num_entities": []}
     for n in ent["num_entities"]:
         r = _run_point(base_cfg, n, ent["num_edges"], duration,
                        f"entity_{n}")

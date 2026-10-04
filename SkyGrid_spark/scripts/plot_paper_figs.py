@@ -9,11 +9,10 @@ outlining pass.
 
 Data sources
 ------------
-* Fig. 3 (scaling): the five-point weak/strong scaling series reported in the
-  paper.  The values below are the ones plotted in the submitted figure
-  (figs/fig_scaling.drawio).  Note that `outputs/scaling/scaling.json`
-  produced by `scripts/run_scaling.py` is a *different* (later) run and does
-  not reproduce these exact points; pass `--scaling-json` to plot it instead.
+* Fig. 3 (scaling): `outputs/scaling/scaling_paper.json`, produced by
+  `scripts/run_scaling.py --scaling configs/scaling_paper.yaml` (weak sweep at
+  the M density, strong sweep at 10K entities, 60 s, seed 20260928).  Pass
+  `--scaling-json` to plot another run.
 * Fig. (fault): `outputs/fault/fault.json` from `scripts/run_fault.py`, which
   matches Table VI of the paper exactly.
 """
@@ -47,69 +46,82 @@ C_GREEN = "#009E73"
 C_VERMIL = "#D55E00"
 C_GREY = "#555555"
 
-# --- Fig. 3 data as plotted in the submitted paper ---------------------------
-SCALING_EDGES = [1, 2, 4, 8, 16]
-WEAK_NORM_TPUT = [1.0, 2.0, 3.9, 7.7, 15.4]  # normalised to 1-edge run
-STRONG_P99_MS = [135.0, 92.0, 72.7, 58.0, 49.0]  # 10K entities fixed
+# --- Fig. 3 (scaling) --------------------------------------------------------
 SLO_MS = 100.0
+DEFAULT_SCALING_JSON = Path(__file__).resolve().parents[1] / "outputs" / "scaling" / "scaling_paper.json"
+
+
+def _load_scaling(scaling_json: Path) -> tuple[list[dict], list[dict]]:
+    """Return (weak, strong) point lists from a run_scaling.py JSON."""
+    data = json.loads(scaling_json.read_text())
+
+    def rows(key: str) -> list[dict]:
+        out = []
+        for r in data[key]:
+            m = r["metrics"]
+            out.append({
+                "edges": int(r["num_edges"]),
+                "entities": int(r["num_entities"]),
+                "p50": float(m["latency_ms"]["p50"]),
+                "p99": float(m["latency_ms"]["p99"]),
+                "offered_ops_s": m["num_events"] / float(r["duration_s"]),
+                "throughput_ops_s": float(m["throughput_ops"]),
+                "edge_cut": float(m["partition_info"].get("edge_cut", 0.0)),
+            })
+        return sorted(out, key=lambda d: d["edges"])
+
+    return rows("weak"), rows("strong")
 
 
 def plot_scaling(out: Path, scaling_json: Path | None) -> None:
-    edges, weak, strong = SCALING_EDGES, WEAK_NORM_TPUT, STRONG_P99_MS
-    if scaling_json is not None:
-        data = json.loads(scaling_json.read_text())
-        w = sorted(data["weak"], key=lambda r: r["edges"])
-        s = sorted(data["strong"], key=lambda r: r["edges"])
-        edges = [r["edges"] for r in w]
-        base = w[0]["throughput_ops_s"]
-        weak = [r["throughput_ops_s"] / base for r in w]
-        strong = [r["p99_ms"] for r in s]
+    """Fig. 3: (a) weak scaling at the M density, (b) strong scaling at 10K.
 
-    # Single-column IEEE figure (3.45 in wide) with two side-by-side panels.
+    Both panels plot p99 against the number of edge units.  In the weak
+    sweep the per-edge load is constant (2.5K entities per edge), so
+    throughput is simply the offered load; the informative quantity is
+    whether the tail stays flat as the fabric grows.  In the strong sweep
+    the single-edge point saturates (p99 in seconds) and is drawn clipped
+    at the top of the axis with its value annotated.
+    """
+    weak, strong = _load_scaling(scaling_json or DEFAULT_SCALING_JSON)
+    edges = [r["edges"] for r in weak]
+
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(3.45, 1.5))
     fs = 6.3  # tick / annotation font size for the compact layout
 
-    # (a) weak scaling
-    ax1.plot(edges, edges, "--", color=C_GREY, lw=1.0, label="Linear ideal")
-    ax1.plot(edges, weak, "-o", color=C_BLUE, ms=3.5, label="SkyGrid")
-    for x, y in zip(edges, weak):
-        ax1.annotate(f"{y:g}", (x, y), textcoords="offset points",
-                     xytext=(4, -8), ha="left", fontsize=5.8, color=C_BLUE)
-    ax1.set_xscale("log", base=2)
-    ax1.set_yscale("log", base=2)
-    ax1.set_xticks(edges)
-    ax1.set_xticklabels([str(e) for e in edges], fontsize=fs)
-    ax1.set_yticks(edges)
-    ax1.set_yticklabels([str(e) for e in edges], fontsize=fs)
-    ax1.set_xlabel("Edge units (entities $\\propto$)", fontsize=6.8)
-    ax1.set_ylabel("Normalised throughput", fontsize=6.8)
-    ax1.set_title("(a) Weak scaling", loc="left", fontsize=7)
-    ax1.grid(True, which="major", ls=":", lw=0.5, alpha=0.7)
-    ax1.legend(loc="upper left", frameon=False, fontsize=6,
-               handlelength=1.6, borderaxespad=0.2)
+    def _panel(ax, pts, title, xlabel, ylim, yticks):
+        xs = [r["edges"] for r in pts]
+        p99 = [r["p99"] for r in pts]
+        p50 = [r["p50"] for r in pts]
+        ax.axhline(SLO_MS, ls="--", color=C_VERMIL, lw=1.0, label=f"{SLO_MS:g} ms SLO")
+        ax.plot(xs, [min(v, ylim[1]) for v in p99], "-s", color=C_GREEN, ms=3.5,
+                label="p99", clip_on=False)
+        ax.plot(xs, p50, "-o", color=C_BLUE, ms=3.0, label="p50")
+        for x, y in zip(xs, p99):
+            if y > ylim[1]:
+                ax.annotate(f"{y/1000:.1f} s", (x, ylim[1]), textcoords="offset points",
+                            xytext=(6, -8), ha="left", fontsize=5.8, color=C_GREEN)
+            else:
+                ax.annotate(f"{y:.0f}", (x, y), textcoords="offset points",
+                            xytext=(0, 4), ha="center", fontsize=5.8, color=C_GREEN)
+        ax.set_xscale("log", base=2)
+        ax.set_xticks(xs)
+        ax.set_xticklabels([str(e) for e in xs], fontsize=fs)
+        ax.tick_params(axis="y", labelsize=fs)
+        ax.set_ylim(*ylim)
+        ax.set_yticks(yticks)
+        ax.set_xlabel(xlabel, fontsize=6.8)
+        ax.set_title(title, loc="left", fontsize=7)
+        ax.grid(True, which="major", ls=":", lw=0.5, alpha=0.7)
 
-    # (b) strong scaling
-    ax2.axhline(SLO_MS, ls="--", color=C_VERMIL, lw=1.0,
-                label=f"{SLO_MS:g} ms SLO")
-    ax2.plot(edges, strong, "-s", color=C_GREEN, ms=3.5, label="SkyGrid p99")
-    for i, (x, y) in enumerate(zip(edges, strong)):
-        # first point sits on the left axis; push its label to the right
-        off = (6, 2) if i == 0 else (0, 5)
-        ax2.annotate(f"{y:g}", (x, y), textcoords="offset points",
-                     xytext=off, ha="left" if i == 0 else "center",
-                     fontsize=5.8, color=C_GREEN)
-    ax2.set_xscale("log", base=2)
-    ax2.set_xticks(edges)
-    ax2.set_xticklabels([str(e) for e in edges], fontsize=fs)
-    ax2.tick_params(axis="y", labelsize=fs)
-    ax2.set_ylim(0, 240)  # headroom so the legend clears the curve
-    ax2.set_yticks([0, 50, 100, 150, 200])
-    ax2.set_xlabel("Edge units (10K entities)", fontsize=6.8)
-    ax2.set_ylabel("p99 latency (ms)", fontsize=6.8)
-    ax2.set_title("(b) Strong scaling", loc="left", fontsize=7)
-    ax2.grid(True, which="major", ls=":", lw=0.5, alpha=0.7)
-    ax2.legend(loc="upper right", frameon=False, fontsize=6,
-               handlelength=1.6, borderaxespad=0.2)
+    _panel(ax1, weak, "(a) Weak scaling", "Edge units (2.5K entities each)",
+           (0, 150), [0, 50, 100, 150])
+    ax1.set_ylabel("Latency (ms)", fontsize=6.8)
+    ax1.legend(loc="upper left", frameon=False, fontsize=6, handlelength=1.6,
+               borderaxespad=0.2, ncol=3, columnspacing=0.8, handletextpad=0.4)
+
+    _panel(ax2, strong, "(b) Strong scaling", "Edge units (10K entities total)",
+           (0, 150), [0, 50, 100, 150])
 
     fig.tight_layout(w_pad=1.0)
     fig.savefig(out, bbox_inches="tight", pad_inches=0.02)
@@ -169,8 +181,8 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--out-dir", type=Path, required=True)
     ap.add_argument("--scaling-json", type=Path, default=None,
-                    help="plot outputs/scaling/scaling.json instead of the "
-                         "paper's figure values")
+                    help="scaling JSON to plot (default: "
+                         "outputs/scaling/scaling_paper.json)")
     ap.add_argument("--fault-json", type=Path,
                     default=Path(__file__).resolve().parents[1]
                     / "outputs" / "fault" / "fault.json")

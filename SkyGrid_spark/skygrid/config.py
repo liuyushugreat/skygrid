@@ -60,6 +60,14 @@ class OpSpec:
 class DAGConfig:
     ops: list[OpSpec] = field(default_factory=list)
     edges: list[tuple[str, str]] = field(default_factory=list)
+    # Join semantics for operators with several parents:
+    #   "first" — fire the child as soon as its first parent completes
+    #             (behaviour of the released engine; multi-parent ops do
+    #             not wait for their other parents);
+    #   "all"   — fire the child once every parent has completed
+    #             (AND-join; the child's input transfer is charged from
+    #             the last-completing parent's site).
+    join: str = "first"
 
 
 # ---------------------------------------------------------------------- fabric
@@ -214,7 +222,8 @@ class SkyGridConfig:
         dag_raw = raw.get("dag", {})
         ops = [OpSpec(**o) for o in dag_raw.get("ops", [])]
         edges = [tuple(e) for e in dag_raw.get("edges", [])]
-        dag = DAGConfig(ops=ops, edges=edges)
+        dag = DAGConfig(ops=ops, edges=edges,
+                        join=str(dag_raw.get("join", "first")))
 
         fab = raw.get("fabric", {})
         edge_raw = fab.get("edge", {})

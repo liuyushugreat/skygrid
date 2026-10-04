@@ -1,0 +1,25 @@
+# Scaling sweep that matches the paper's Sec. V-C / Fig. 3 description:
+#   weak   — entities and edge units grow proportionally at the M-regime
+#            density (2.5K entities per edge, i.e. 40K entities on 16 edges;
+#            the 6.25K-per-edge variant in scaling_dense_weak.json saturates
+#            every edge at 70-85% utilisation and is kept only for reference);
+#   strong — 10K entities fixed (the M regime), edge units 1..16.
+# Same 60 s virtual horizon and seed as the main comparison, so each point is
+# directly comparable with Table I.  run_scaling.py iterates over the pairs
+# and invokes the runtime with each override (SkyGrid = STP + COP-H + ABP).
+
+seed: 20260928
+
+sweeps:
+  weak:
+    - {num_entities:   2500, num_edges:  1}
+    - {num_entities:   5000, num_edges:  2}
+    - {num_entities:  10000, num_edges:  4}
+    - {num_entities:  20000, num_edges:  8}
+    - {num_entities:  40000, num_edges: 16}
+  strong:
+    num_entities: 10000
+    num_edges: [1, 2, 4, 8, 16]
+
+duration_s: 60.0
+output_dir: outputs/scaling
