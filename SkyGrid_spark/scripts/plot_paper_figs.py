@@ -65,44 +65,53 @@ def plot_scaling(out: Path, scaling_json: Path | None) -> None:
         weak = [r["throughput_ops_s"] / base for r in w]
         strong = [r["p99_ms"] for r in s]
 
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(7.0, 2.35))
+    # Single-column IEEE figure (3.45 in wide) with two side-by-side panels.
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(3.45, 1.5))
+    fs = 6.3  # tick / annotation font size for the compact layout
 
     # (a) weak scaling
-    ax1.plot(edges, edges, "--", color=C_GREY, lw=1.1, label="Linear ideal")
-    ax1.plot(edges, weak, "-o", color=C_BLUE, ms=4.5, label="SkyGrid")
+    ax1.plot(edges, edges, "--", color=C_GREY, lw=1.0, label="Linear ideal")
+    ax1.plot(edges, weak, "-o", color=C_BLUE, ms=3.5, label="SkyGrid")
     for x, y in zip(edges, weak):
         ax1.annotate(f"{y:g}", (x, y), textcoords="offset points",
-                     xytext=(-2, 6), ha="right", fontsize=6.8, color=C_BLUE)
+                     xytext=(4, -8), ha="left", fontsize=5.8, color=C_BLUE)
     ax1.set_xscale("log", base=2)
     ax1.set_yscale("log", base=2)
     ax1.set_xticks(edges)
-    ax1.set_xticklabels([str(e) for e in edges])
+    ax1.set_xticklabels([str(e) for e in edges], fontsize=fs)
     ax1.set_yticks(edges)
-    ax1.set_yticklabels([str(e) for e in edges])
-    ax1.set_xlabel("Edge units (entities scale proportionally)")
-    ax1.set_ylabel("Normalised throughput")
-    ax1.set_title("(a) Weak scaling", loc="left")
-    ax1.grid(True, which="major", ls=":", lw=0.6, alpha=0.7)
-    ax1.legend(loc="upper left", frameon=False)
+    ax1.set_yticklabels([str(e) for e in edges], fontsize=fs)
+    ax1.set_xlabel("Edge units (entities $\\propto$)", fontsize=6.8)
+    ax1.set_ylabel("Normalised throughput", fontsize=6.8)
+    ax1.set_title("(a) Weak scaling", loc="left", fontsize=7)
+    ax1.grid(True, which="major", ls=":", lw=0.5, alpha=0.7)
+    ax1.legend(loc="upper left", frameon=False, fontsize=6,
+               handlelength=1.6, borderaxespad=0.2)
 
     # (b) strong scaling
-    ax2.axhline(SLO_MS, ls="--", color=C_VERMIL, lw=1.1,
+    ax2.axhline(SLO_MS, ls="--", color=C_VERMIL, lw=1.0,
                 label=f"{SLO_MS:g} ms SLO")
-    ax2.plot(edges, strong, "-s", color=C_GREEN, ms=4.5, label="SkyGrid p99")
-    for x, y in zip(edges, strong):
+    ax2.plot(edges, strong, "-s", color=C_GREEN, ms=3.5, label="SkyGrid p99")
+    for i, (x, y) in enumerate(zip(edges, strong)):
+        # first point sits on the left axis; push its label to the right
+        off = (6, 2) if i == 0 else (0, 5)
         ax2.annotate(f"{y:g}", (x, y), textcoords="offset points",
-                     xytext=(0, 6), ha="center", fontsize=6.8, color=C_GREEN)
+                     xytext=off, ha="left" if i == 0 else "center",
+                     fontsize=5.8, color=C_GREEN)
     ax2.set_xscale("log", base=2)
     ax2.set_xticks(edges)
-    ax2.set_xticklabels([str(e) for e in edges])
-    ax2.set_ylim(0, 160)
-    ax2.set_xlabel("Edge units (10K entities fixed)")
-    ax2.set_ylabel("p99 latency (ms)")
-    ax2.set_title("(b) Strong scaling", loc="left")
-    ax2.grid(True, which="major", ls=":", lw=0.6, alpha=0.7)
-    ax2.legend(loc="upper right", frameon=False)
+    ax2.set_xticklabels([str(e) for e in edges], fontsize=fs)
+    ax2.tick_params(axis="y", labelsize=fs)
+    ax2.set_ylim(0, 240)  # headroom so the legend clears the curve
+    ax2.set_yticks([0, 50, 100, 150, 200])
+    ax2.set_xlabel("Edge units (10K entities)", fontsize=6.8)
+    ax2.set_ylabel("p99 latency (ms)", fontsize=6.8)
+    ax2.set_title("(b) Strong scaling", loc="left", fontsize=7)
+    ax2.grid(True, which="major", ls=":", lw=0.5, alpha=0.7)
+    ax2.legend(loc="upper right", frameon=False, fontsize=6,
+               handlelength=1.6, borderaxespad=0.2)
 
-    fig.tight_layout(w_pad=1.6)
+    fig.tight_layout(w_pad=1.0)
     fig.savefig(out, bbox_inches="tight", pad_inches=0.02)
     plt.close(fig)
     print(f"[plot] wrote {out}")
