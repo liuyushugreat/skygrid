@@ -147,6 +147,18 @@ from YAML configs under `configs/`.  Seeds are pinned in each config
 dataclasses that serialize to JSON verbatim, so reviewers can diff two
 runs field-by-field.
 
+**DAG join semantics (`dag.join`).**  By default (`first`, the
+setting behind every reported number) an operator with several
+parents is triggered when its *first* parent completes — an eager
+join.  In the default DAG `rule_check` therefore starts on
+`feat_extract`'s output and `risk_score`'s output is consumed
+asynchronously, so `risk_score` loads the fabric but is off the
+latency-critical path (Fig. 1 of the paper draws that edge dashed).
+Setting `dag.join: all` enforces a strict AND-join; on the M regime it
+raises p99 to 82.3 ms (SkyGrid), 84.5 ms (LDG+COP-H) and 117.5 ms
+(LDG+static) at unchanged cross-edge traffic, as reported in the
+paper's sensitivity paragraph.
+
 ## License
 
 This project is licensed under the Apache License 2.0.

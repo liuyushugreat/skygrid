@@ -32,9 +32,14 @@ dag:
   edges:
     - [feat_extract, risk_score]
     - [feat_extract, rule_check]
-    - [risk_score,   rule_check]
+    - [risk_score,   rule_check]   # non-blocking under join: first (see below)
     - [rule_check,   conformal]
     - [conformal,    audit]
+  # join: first (default) = eager join, a multi-parent op starts when its
+  #   first parent completes (rule_check does not wait for risk_score).
+  #   This is the semantics behind every reported number.
+  # join: all = strict AND-join (sensitivity run in the paper, Sec. V-G).
+  join: first
 
 fabric:
   # Hardware calibration: DGX Spark (compute) + GP Spark (storage).

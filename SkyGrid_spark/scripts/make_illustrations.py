@@ -40,22 +40,27 @@ def draw_dag(out: Path) -> None:
                 fontsize=7, color="#666")
         pos[name] = (x, y)
 
-    def arrow(src, dst):
+    def arrow(src, dst, dashed=False):
         (x0, y0), (x1, y1) = pos[src], pos[dst]
         ax.annotate(
             "", xy=(x1 - 0.85, y1), xytext=(x0 + 0.85, y0),
             arrowprops=dict(arrowstyle="->", color="#444", lw=1.1,
+                            linestyle="--" if dashed else "-",
                             connectionstyle="arc3,rad=0.0"),
         )
 
-    for src, dst in [
-        ("feat_extract", "risk_score"),
-        ("feat_extract", "rule_check"),
-        ("risk_score", "rule_check"),
-        ("rule_check", "conformal"),
-        ("conformal", "audit"),
+    # The engine uses an eager (first-parent) join by default
+    # (``dag.join: first``): rule_check is triggered by feat_extract and
+    # consumes risk_score's output asynchronously, so that edge is drawn
+    # dashed (non-blocking), matching Fig. 1 of the paper.
+    for src, dst, dashed in [
+        ("feat_extract", "risk_score", False),
+        ("feat_extract", "rule_check", False),
+        ("risk_score", "rule_check", True),
+        ("rule_check", "conformal", False),
+        ("conformal", "audit", False),
     ]:
-        arrow(src, dst)
+        arrow(src, dst, dashed)
 
     fig.tight_layout()
     fig.savefig(out, format="pdf", bbox_inches="tight")
