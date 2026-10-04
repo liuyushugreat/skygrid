@@ -1,0 +1,61 @@
+{
+  "config_path": "D:\\BaiduSyncdisk\\SCI\\SKYPAPER\\SkyNetUamPlatform\\modules\\SkyGrid_spark\\configs\\default.yaml",
+  "light_load": {
+    "num_entities": 500,
+    "duration_s": 10.0
+  },
+  "placement": {
+    "feat_extract": "edge-0",
+    "risk_score": "edge-0",
+    "rule_check": "edge-0",
+    "conformal": "edge-0",
+    "audit": "edge-0"
+  },
+  "per_op": [
+    {
+      "op": "audit",
+      "site": "edge-0",
+      "observed_ms": 0.0028,
+      "predicted_ms": 0.0002,
+      "abs_error_ms": 0.0026,
+      "rel_error": 0.9286
+    },
+    {
+      "op": "conformal",
+      "site": "edge-0",
+      "observed_ms": 0.004,
+      "predicted_ms": 0.0008,
+      "abs_error_ms": 0.0032,
+      "rel_error": 0.8
+    },
+    {
+      "op": "feat_extract",
+      "site": "edge-0",
+      "observed_ms": 0.0057,
+      "predicted_ms": 0.002,
+      "abs_error_ms": 0.0037,
+      "rel_error": 0.6485
+    },
+    {
+      "op": "risk_score",
+      "site": "edge-0",
+      "observed_ms": 0.3507,
+      "predicted_ms": 0.12,
+      "abs_error_ms": 0.2307,
+      "rel_error": 0.6578
+    },
+    {
+      "op": "rule_check",
+      "site": "edge-0",
+      "observed_ms": 0.0015,
+      "predicted_ms": 0.0005,
+      "abs_error_ms": 0.001,
+      "rel_error": 0.6667
+    }
+  ],
+  "summary": {
+    "mae_ms": 0.048241874999969514,
+    "mean_rel_error": 0.7403256693391296,
+    "max_abs_error_ms": 0.2307187499999418
+  }
+}

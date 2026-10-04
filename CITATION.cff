@@ -1,0 +1,48 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata below."
+title: "SkyGrid: A Distributed Edge-Cloud Runtime for Hardware-Aware Partitioning and Placement of Hybrid Neural-Symbolic Pipelines"
+version: 0.1.0
+date-released: "2026-04-04"
+url: "https://github.com/liuyushugreat/skygrid"
+repository-code: "https://github.com/liuyushugreat/skygrid"
+license: Apache-2.0
+authors:
+  - family-names: Liu
+    given-names: Yushu
+    email: liuyushu@tju.edu.cn
+    affiliation: "School of Artificial Intelligence, Tianjin University"
+  - family-names: Wang
+    given-names: Longbiao
+    email: longbiao_wang@tju.edu.cn
+    affiliation: "School of Artificial Intelligence, Tianjin University"
+  - family-names: Du
+    given-names: Chenglin
+    email: dcl@zytctech.com
+    affiliation: "Information Technology Sub-committee, Central Committee of the China Democratic National Construction Association"
+  - family-names: Huang
+    given-names: Fei
+    email: huangfei@luisuantech.com
+    affiliation: "Guangdong Luisuan Technology Co., Ltd."
+keywords:
+  - edge-cloud computing
+  - distributed runtime
+  - hardware-aware placement
+  - graph partitioning
+  - state locality
+  - neural-symbolic pipelines
+  - pipeline parallelism
+preferred-citation:
+  type: conference-paper
+  title: "SkyGrid: A Distributed Edge-Cloud Runtime for Hardware-Aware Partitioning and Placement of Hybrid Neural-Symbolic Pipelines"
+  authors:
+    - family-names: Liu
+      given-names: Yushu
+    - family-names: Wang
+      given-names: Longbiao
+    - family-names: Du
+      given-names: Chenglin
+    - family-names: Huang
+      given-names: Fei
+  year: 2026
+  notes: "Manuscript under submission"
+  url: "https://github.com/liuyushugreat/skygrid"

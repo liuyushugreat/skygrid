@@ -1,0 +1,32 @@
+{
+  "setting": {
+    "cloud_tflops": 10.0,
+    "edge_cloud_latency_ms": 0.05,
+    "edge_cloud_bw_gbps": 100.0,
+    "symbolic_state_refs": 8,
+    "symbolic_flops_multiplier": 100000,
+    "hot_hit_rate": 0.2,
+    "warm_hit_rate": 0.2
+  },
+  "locaware": {
+    "placement": {
+      "feat_extract": "edge-0",
+      "risk_score": "cloud",
+      "rule_check": "cloud",
+      "conformal": "cloud",
+      "audit": "cloud"
+    },
+    "critical_path_ms_with_state": 303.26406016,
+    "critical_path_ms_without_state": 15.26406016
+  },
+  "cop_h": {
+    "placement": {
+      "feat_extract": "edge-0",
+      "risk_score": "cloud",
+      "rule_check": "cloud",
+      "conformal": "cloud",
+      "audit": "edge-0"
+    },
+    "critical_path_ms_with_state": 282.89766271999997
+  }
+}

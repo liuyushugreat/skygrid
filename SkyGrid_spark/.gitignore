@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+.venv/
+build/
+dist/
+*.egg-info/
+
+# Reference outputs/ (metrics + figures) are tracked for the paper artifact.
+# Regenerated local dumps may be added with ordinary git add if desired.
+
+# Locally-overridden configs that may reference internal data.
+configs/*_internal.yaml

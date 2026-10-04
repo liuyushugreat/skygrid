@@ -1,0 +1,482 @@
+{
+  "config": {
+    "num_entities": 20000,
+    "duration_s": 30.0,
+    "num_edges": 4,
+    "seed": 20260928
+  },
+  "runs": [
+    {
+      "spec": {
+        "label": "cloud-only",
+        "partition": "hash",
+        "placement": "all_cloud",
+        "pipeline": "abp"
+      },
+      "metrics": {
+        "label": "cloud-only",
+        "duration_s": 30.0,
+        "num_events": 1589089,
+        "completed_events": 1589056,
+        "partition_info": {
+          "method": "hash",
+          "edge_cut": 0.7397769516728625,
+          "load_imbalance": 1.0002,
+          "spatial_compactness": 29.8638162316929,
+          "sizes": [
+            4999.0,
+            5001.0,
+            5001.0,
+            4999.0
+          ]
+        },
+        "placement_info": {
+          "method": "all_cloud",
+          "assignment": {
+            "feat_extract": "cloud",
+            "risk_score": "cloud",
+            "rule_check": "cloud",
+            "conformal": "cloud",
+            "audit": "cloud"
+          }
+        },
+        "pipeline_info": {
+          "method": "abp"
+        },
+        "latency_ms": {
+          "mean": 395643.22671215876,
+          "p50": 409182.5185884628,
+          "p95": 422477.1978324395,
+          "p99": 423394.02669551084,
+          "max": 423680.01924857177
+        },
+        "throughput_ops": 52968.53333333333,
+        "cross_edge_bytes": 2229788096.0,
+        "cloud_util": 0.9999304935702772,
+        "edge_util": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "rebalance_moves": 0,
+        "state_tier_hit_ratio": 1.0,
+        "state_tier_avg_ms": 0.0,
+        "state_tier_total_ms": 0.0
+      }
+    },
+    {
+      "spec": {
+        "label": "edge-only",
+        "partition": "hash",
+        "placement": "all_edge",
+        "pipeline": "abp"
+      },
+      "metrics": {
+        "label": "edge-only",
+        "duration_s": 30.0,
+        "num_events": 1589089,
+        "completed_events": 1588864,
+        "partition_info": {
+          "method": "hash",
+          "edge_cut": 0.7397769516728625,
+          "load_imbalance": 1.0002,
+          "spatial_compactness": 29.8638162316929,
+          "sizes": [
+            4999.0,
+            5001.0,
+            5001.0,
+            4999.0
+          ]
+        },
+        "placement_info": {
+          "method": "all_edge",
+          "assignment": {
+            "feat_extract": "edge-0",
+            "risk_score": "edge-0",
+            "rule_check": "edge-0",
+            "conformal": "edge-0",
+            "audit": "edge-0"
+          }
+        },
+        "pipeline_info": {
+          "method": "abp"
+        },
+        "latency_ms": {
+          "mean": 296395.5292664682,
+          "p50": 315142.1622179911,
+          "p95": 329920.684733319,
+          "p99": 331459.40248279355,
+          "max": 332217.474713886
+        },
+        "throughput_ops": 52962.13333333333,
+        "cross_edge_bytes": 592481920.0,
+        "cloud_util": 0.0,
+        "edge_util": [
+          0.9999750860303459,
+          0.9999828584808217,
+          0.9999797934792612,
+          0.999980520436221
+        ],
+        "rebalance_moves": 0,
+        "state_tier_hit_ratio": 0.9488,
+        "state_tier_avg_ms": 0.6057,
+        "state_tier_total_ms": 18391038.696
+      }
+    },
+    {
+      "spec": {
+        "label": "hash+static",
+        "partition": "hash",
+        "placement": "static",
+        "pipeline": "abp"
+      },
+      "metrics": {
+        "label": "hash+static",
+        "duration_s": 30.0,
+        "num_events": 1589089,
+        "completed_events": 1588864,
+        "partition_info": {
+          "method": "hash",
+          "edge_cut": 0.7397769516728625,
+          "load_imbalance": 1.0002,
+          "spatial_compactness": 29.8638162316929,
+          "sizes": [
+            4999.0,
+            5001.0,
+            5001.0,
+            4999.0
+          ]
+        },
+        "placement_info": {
+          "method": "static",
+          "assignment": {
+            "feat_extract": "cloud",
+            "risk_score": "cloud",
+            "rule_check": "edge-0",
+            "conformal": "edge-0",
+            "audit": "edge-0"
+          }
+        },
+        "pipeline_info": {
+          "method": "abp"
+        },
+        "latency_ms": {
+          "mean": 26868.161842225283,
+          "p50": 30305.020349037964,
+          "p95": 34203.91430847494,
+          "p99": 36487.31831259029,
+          "max": 36684.1503878206
+        },
+        "throughput_ops": 52962.13333333333,
+        "cross_edge_bytes": 2568272896.0,
+        "cloud_util": 0.9999302502082881,
+        "edge_util": [
+          0.01061773024871367,
+          0.010601034332412529,
+          0.010606382527176635,
+          0.010582751022499254
+        ],
+        "rebalance_moves": 0,
+        "state_tier_hit_ratio": 0.9486,
+        "state_tier_avg_ms": 0.6057,
+        "state_tier_total_ms": 15930704.679
+      }
+    },
+    {
+      "spec": {
+        "label": "random+static",
+        "partition": "random",
+        "placement": "static",
+        "pipeline": "abp"
+      },
+      "metrics": {
+        "label": "random+static",
+        "duration_s": 30.0,
+        "num_events": 1589089,
+        "completed_events": 1588864,
+        "partition_info": {
+          "method": "random",
+          "edge_cut": 0.7472118959107806,
+          "load_imbalance": 1.013,
+          "spatial_compactness": 29.859971131288965,
+          "sizes": [
+            5056.0,
+            5065.0,
+            5016.0,
+            4863.0
+          ]
+        },
+        "placement_info": {
+          "method": "static",
+          "assignment": {
+            "feat_extract": "cloud",
+            "risk_score": "cloud",
+            "rule_check": "edge-0",
+            "conformal": "edge-0",
+            "audit": "edge-0"
+          }
+        },
+        "pipeline_info": {
+          "method": "abp"
+        },
+        "latency_ms": {
+          "mean": 26868.14077519803,
+          "p50": 30304.507940904892,
+          "p95": 34203.027802873876,
+          "p99": 36486.875849602824,
+          "max": 36684.331349755164
+        },
+        "throughput_ops": 52962.13333333333,
+        "cross_edge_bytes": 2567632384.0,
+        "cloud_util": 0.9999302502082881,
+        "edge_util": [
+          0.010716110601248791,
+          0.010732965126925275,
+          0.010645304723929803,
+          0.010313699726333994
+        ],
+        "rebalance_moves": 0,
+        "state_tier_hit_ratio": 0.9486,
+        "state_tier_avg_ms": 0.6057,
+        "state_tier_total_ms": 15930704.679
+      }
+    },
+    {
+      "spec": {
+        "label": "ldg+static",
+        "partition": "ldg",
+        "placement": "static",
+        "pipeline": "abp"
+      },
+      "metrics": {
+        "label": "ldg+static",
+        "duration_s": 30.0,
+        "num_events": 1589089,
+        "completed_events": 1588928,
+        "partition_info": {
+          "method": "ldg",
+          "edge_cut": 0.6765799256505576,
+          "load_imbalance": 1.1,
+          "spatial_compactness": 29.82337120610558,
+          "sizes": [
+            5500.0,
+            5500.0,
+            5500.0,
+            3500.0
+          ]
+        },
+        "placement_info": {
+          "method": "static",
+          "assignment": {
+            "feat_extract": "cloud",
+            "risk_score": "cloud",
+            "rule_check": "edge-0",
+            "conformal": "edge-0",
+            "audit": "edge-0"
+          }
+        },
+        "pipeline_info": {
+          "method": "abp"
+        },
+        "latency_ms": {
+          "mean": 26868.672543415018,
+          "p50": 30304.776203554407,
+          "p95": 34203.80590815568,
+          "p99": 36484.69644782943,
+          "max": 36683.133136812365
+        },
+        "throughput_ops": 52964.26666666667,
+        "cross_edge_bytes": 2563910144.0,
+        "cloud_util": 0.9999302502082881,
+        "edge_util": [
+          0.01164007224892869,
+          0.011684075671225251,
+          0.011654785119174251,
+          0.007431869960644166
+        ],
+        "rebalance_moves": 0,
+        "state_tier_hit_ratio": 0.9486,
+        "state_tier_avg_ms": 0.6057,
+        "state_tier_total_ms": 15931247.385
+      }
+    },
+    {
+      "spec": {
+        "label": "ldg+cop",
+        "partition": "ldg",
+        "placement": "cop",
+        "pipeline": "abp"
+      },
+      "metrics": {
+        "label": "ldg+cop",
+        "duration_s": 30.0,
+        "num_events": 1589089,
+        "completed_events": 1588783,
+        "partition_info": {
+          "method": "ldg",
+          "edge_cut": 0.6765799256505576,
+          "load_imbalance": 1.1,
+          "spatial_compactness": 29.82337120610558,
+          "sizes": [
+            5500.0,
+            5500.0,
+            5500.0,
+            3500.0
+          ]
+        },
+        "placement_info": {
+          "method": "cop",
+          "assignment": {
+            "feat_extract": "edge-0",
+            "risk_score": "edge-0",
+            "rule_check": "edge-0",
+            "conformal": "edge-0",
+            "audit": "edge-0"
+          }
+        },
+        "pipeline_info": {
+          "method": "abp"
+        },
+        "latency_ms": {
+          "mean": 313640.044245443,
+          "p50": 368466.43095017446,
+          "p95": 389548.4409281992,
+          "p99": 391291.3844149566,
+          "max": 391946.60291690065
+        },
+        "throughput_ops": 52959.433333333334,
+        "cross_edge_bytes": 591774400.0,
+        "cloud_util": 0.0,
+        "edge_util": [
+          0.9999835219037381,
+          0.9999852909793672,
+          0.9999827491867754,
+          0.999952333653006
+        ],
+        "rebalance_moves": 0,
+        "state_tier_hit_ratio": 0.9487749999999999,
+        "state_tier_avg_ms": 0.6057,
+        "state_tier_total_ms": 18563869.134
+      }
+    },
+    {
+      "spec": {
+        "label": "ldg+locaware",
+        "partition": "ldg",
+        "placement": "loc_aware",
+        "pipeline": "abp"
+      },
+      "metrics": {
+        "label": "ldg+locaware",
+        "duration_s": 30.0,
+        "num_events": 1589089,
+        "completed_events": 1588783,
+        "partition_info": {
+          "method": "ldg",
+          "edge_cut": 0.6765799256505576,
+          "load_imbalance": 1.1,
+          "spatial_compactness": 29.82337120610558,
+          "sizes": [
+            5500.0,
+            5500.0,
+            5500.0,
+            3500.0
+          ]
+        },
+        "placement_info": {
+          "method": "loc_aware",
+          "assignment": {
+            "feat_extract": "edge-0",
+            "risk_score": "edge-0",
+            "rule_check": "edge-0",
+            "conformal": "edge-0",
+            "audit": "edge-0"
+          }
+        },
+        "pipeline_info": {
+          "method": "abp"
+        },
+        "latency_ms": {
+          "mean": 313640.044245443,
+          "p50": 368466.43095017446,
+          "p95": 389548.4409281992,
+          "p99": 391291.3844149566,
+          "max": 391946.60291690065
+        },
+        "throughput_ops": 52959.433333333334,
+        "cross_edge_bytes": 591774400.0,
+        "cloud_util": 0.0,
+        "edge_util": [
+          0.9999835219037381,
+          0.9999852909793672,
+          0.9999827491867754,
+          0.999952333653006
+        ],
+        "rebalance_moves": 0,
+        "state_tier_hit_ratio": 0.9487749999999999,
+        "state_tier_avg_ms": 0.6057,
+        "state_tier_total_ms": 18563869.134
+      }
+    },
+    {
+      "spec": {
+        "label": "skygrid (stp+cop+abp)",
+        "partition": "stp",
+        "placement": "cop",
+        "pipeline": "abp"
+      },
+      "metrics": {
+        "label": "skygrid (stp+cop+abp)",
+        "duration_s": 30.0,
+        "num_events": 1589089,
+        "completed_events": 1588740,
+        "partition_info": {
+          "method": "stp",
+          "edge_cut": 0.14869888475836432,
+          "load_imbalance": 1.2782,
+          "spatial_compactness": 21.896561614404977,
+          "sizes": [
+            6390.0,
+            2702.0,
+            4517.0,
+            6391.0
+          ]
+        },
+        "placement_info": {
+          "method": "cop",
+          "assignment": {
+            "feat_extract": "edge-0",
+            "risk_score": "edge-0",
+            "rule_check": "edge-0",
+            "conformal": "edge-0",
+            "audit": "edge-0"
+          }
+        },
+        "pipeline_info": {
+          "method": "abp"
+        },
+        "latency_ms": {
+          "mean": 260623.70898224576,
+          "p50": 295184.8504474664,
+          "p95": 317613.9494025346,
+          "p99": 318991.27160231123,
+          "max": 319624.86357835983
+        },
+        "throughput_ops": 52958.0,
+        "cross_edge_bytes": 206395072.0,
+        "cloud_util": 0.0,
+        "edge_util": [
+          0.9999848811627641,
+          0.9998945209319009,
+          0.999973895774933,
+          0.9999836416331113
+        ],
+        "rebalance_moves": 1024,
+        "state_tier_hit_ratio": 0.9486749999999999,
+        "state_tier_avg_ms": 0.6057,
+        "state_tier_total_ms": 16072201.044
+      }
+    }
+  ]
+}

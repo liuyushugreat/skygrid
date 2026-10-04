@@ -1,0 +1,1086 @@
+{
+  "profiles": {
+    "healthy": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "one-edge-degraded": [
+      1.0,
+      1.0,
+      1.0,
+      0.3
+    ],
+    "two-edges-degraded": [
+      1.0,
+      1.0,
+      0.5,
+      0.3
+    ],
+    "one-edge-failed": [
+      1.0,
+      1.0,
+      1.0,
+      0.05
+    ]
+  },
+  "rows": [
+    {
+      "profile": "healthy",
+      "tflops_per_node": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "spec": {
+        "label": "ldg+static",
+        "partition": "ldg",
+        "placement": "static",
+        "pipeline": "abp"
+      },
+      "metrics": {
+        "label": "ldg+static@healthy",
+        "duration_s": 60.0,
+        "num_events": 729989,
+        "completed_events": 729675,
+        "partition_info": {
+          "method": "ldg",
+          "edge_cut": 0.680161943319838,
+          "load_imbalance": 1.1,
+          "spatial_compactness": 29.412892987687638,
+          "sizes": [
+            2750.0,
+            2750.0,
+            2750.0,
+            1750.0
+          ]
+        },
+        "placement_info": {
+          "method": "static",
+          "assignment": {
+            "feat_extract": "cloud",
+            "risk_score": "cloud",
+            "rule_check": "edge-0",
+            "conformal": "edge-0",
+            "audit": "edge-0"
+          }
+        },
+        "pipeline_info": {
+          "method": "abp"
+        },
+        "latency_ms": {
+          "mean": 86.6228925413423,
+          "p50": 86.33240288939123,
+          "p95": 96.58347144800791,
+          "p99": 100.72577453969699,
+          "max": 493.9189084719328
+        },
+        "throughput_ops": 12161.25,
+        "cross_edge_bytes": 1469065696.0,
+        "cloud_util": 0.4409839998819117,
+        "edge_util": [
+          0.009974970405101969,
+          0.009968617121061797,
+          0.009929745168250393,
+          0.006352555836398053
+        ],
+        "rebalance_moves": 0,
+        "state_tier_hit_ratio": 0.94685,
+        "state_tier_avg_ms": 0.6057,
+        "state_tier_total_ms": 12374201.452
+      }
+    },
+    {
+      "profile": "healthy",
+      "tflops_per_node": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "spec": {
+        "label": "ldg+cop",
+        "partition": "ldg",
+        "placement": "cop",
+        "pipeline": "abp"
+      },
+      "metrics": {
+        "label": "ldg+cop@healthy",
+        "duration_s": 60.0,
+        "num_events": 729989,
+        "completed_events": 729660,
+        "partition_info": {
+          "method": "ldg",
+          "edge_cut": 0.680161943319838,
+          "load_imbalance": 1.1,
+          "spatial_compactness": 29.412892987687638,
+          "sizes": [
+            2750.0,
+            2750.0,
+            2750.0,
+            1750.0
+          ]
+        },
+        "placement_info": {
+          "method": "cop",
+          "assignment": {
+            "feat_extract": "edge-0",
+            "risk_score": "edge-0",
+            "rule_check": "edge-0",
+            "conformal": "edge-0",
+            "audit": "edge-0"
+          }
+        },
+        "pipeline_info": {
+          "method": "abp"
+        },
+        "latency_ms": {
+          "mean": 61.06647921033148,
+          "p50": 51.20625527161246,
+          "p95": 69.03615241766683,
+          "p99": 75.37410537086153,
+          "max": 14311.97454637484
+        },
+        "throughput_ops": 12161.0,
+        "cross_edge_bytes": 347673280.0,
+        "cloud_util": 0.0,
+        "edge_util": [
+          0.3805369301828434,
+          0.3815993310414237,
+          0.3776126069577928,
+          0.2810701669643657
+        ],
+        "rebalance_moves": 0,
+        "state_tier_hit_ratio": 0.947375,
+        "state_tier_avg_ms": 0.6057,
+        "state_tier_total_ms": 12375468.577
+      }
+    },
+    {
+      "profile": "healthy",
+      "tflops_per_node": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "spec": {
+        "label": "ldg+locaware",
+        "partition": "ldg",
+        "placement": "loc_aware",
+        "pipeline": "abp"
+      },
+      "metrics": {
+        "label": "ldg+locaware@healthy",
+        "duration_s": 60.0,
+        "num_events": 729989,
+        "completed_events": 729660,
+        "partition_info": {
+          "method": "ldg",
+          "edge_cut": 0.680161943319838,
+          "load_imbalance": 1.1,
+          "spatial_compactness": 29.412892987687638,
+          "sizes": [
+            2750.0,
+            2750.0,
+            2750.0,
+            1750.0
+          ]
+        },
+        "placement_info": {
+          "method": "loc_aware",
+          "assignment": {
+            "feat_extract": "edge-0",
+            "risk_score": "edge-0",
+            "rule_check": "edge-0",
+            "conformal": "edge-0",
+            "audit": "edge-0"
+          }
+        },
+        "pipeline_info": {
+          "method": "abp"
+        },
+        "latency_ms": {
+          "mean": 61.06647921033148,
+          "p50": 51.20625527161246,
+          "p95": 69.03615241766683,
+          "p99": 75.37410537086153,
+          "max": 14311.97454637484
+        },
+        "throughput_ops": 12161.0,
+        "cross_edge_bytes": 347673280.0,
+        "cloud_util": 0.0,
+        "edge_util": [
+          0.3805369301828434,
+          0.3815993310414237,
+          0.3776126069577928,
+          0.2810701669643657
+        ],
+        "rebalance_moves": 0,
+        "state_tier_hit_ratio": 0.947375,
+        "state_tier_avg_ms": 0.6057,
+        "state_tier_total_ms": 12375468.577
+      }
+    },
+    {
+      "profile": "healthy",
+      "tflops_per_node": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "spec": {
+        "label": "skygrid",
+        "partition": "stp",
+        "placement": "cop",
+        "pipeline": "abp"
+      },
+      "metrics": {
+        "label": "skygrid@healthy",
+        "duration_s": 60.0,
+        "num_events": 729989,
+        "completed_events": 729747,
+        "partition_info": {
+          "method": "stp",
+          "edge_cut": 0.07692307692307693,
+          "load_imbalance": 1.25,
+          "spatial_compactness": 12.368237630577779,
+          "sizes": [
+            3125.0,
+            1875.0,
+            1875.0,
+            3125.0
+          ]
+        },
+        "placement_info": {
+          "method": "cop",
+          "assignment": {
+            "feat_extract": "edge-0",
+            "risk_score": "edge-0",
+            "rule_check": "edge-0",
+            "conformal": "edge-0",
+            "audit": "edge-0"
+          }
+        },
+        "pipeline_info": {
+          "method": "abp"
+        },
+        "latency_ms": {
+          "mean": 59.45537416370851,
+          "p50": 48.84332240454751,
+          "p95": 66.44040742932957,
+          "p99": 72.70946156237021,
+          "max": 16124.760558288915
+        },
+        "throughput_ops": 12162.45,
+        "cross_edge_bytes": 149688416.0,
+        "cloud_util": 0.0,
+        "edge_util": [
+          0.4137583321624253,
+          0.29246413213775635,
+          0.28629360347699057,
+          0.41998299808331024
+        ],
+        "rebalance_moves": 493,
+        "state_tier_hit_ratio": 0.947325,
+        "state_tier_avg_ms": 0.6057,
+        "state_tier_total_ms": 12376163.92
+      }
+    },
+    {
+      "profile": "one-edge-degraded",
+      "tflops_per_node": [
+        1.0,
+        1.0,
+        1.0,
+        0.3
+      ],
+      "spec": {
+        "label": "ldg+static",
+        "partition": "ldg",
+        "placement": "static",
+        "pipeline": "abp"
+      },
+      "metrics": {
+        "label": "ldg+static@one-edge-degraded",
+        "duration_s": 60.0,
+        "num_events": 729989,
+        "completed_events": 729713,
+        "partition_info": {
+          "method": "ldg",
+          "edge_cut": 0.680161943319838,
+          "load_imbalance": 1.1,
+          "spatial_compactness": 29.412892987687638,
+          "sizes": [
+            2750.0,
+            2750.0,
+            2750.0,
+            1750.0
+          ]
+        },
+        "placement_info": {
+          "method": "static",
+          "assignment": {
+            "feat_extract": "cloud",
+            "risk_score": "cloud",
+            "rule_check": "edge-0",
+            "conformal": "edge-0",
+            "audit": "edge-0"
+          }
+        },
+        "pipeline_info": {
+          "method": "abp"
+        },
+        "latency_ms": {
+          "mean": 86.85485849482016,
+          "p50": 86.41992426390607,
+          "p95": 96.66050888889531,
+          "p99": 100.7997197740717,
+          "max": 835.9653198116648
+        },
+        "throughput_ops": 12161.883333333333,
+        "cross_edge_bytes": 1469055392.0,
+        "cloud_util": 0.44098500331375445,
+        "edge_util": [
+          0.009974759268533539,
+          0.00996831691444632,
+          0.00993004099971324,
+          0.021014183869925724
+        ],
+        "rebalance_moves": 0,
+        "state_tier_hit_ratio": 0.94685,
+        "state_tier_avg_ms": 0.6057,
+        "state_tier_total_ms": 12374138.459
+      }
+    },
+    {
+      "profile": "one-edge-degraded",
+      "tflops_per_node": [
+        1.0,
+        1.0,
+        1.0,
+        0.3
+      ],
+      "spec": {
+        "label": "ldg+cop",
+        "partition": "ldg",
+        "placement": "cop",
+        "pipeline": "abp"
+      },
+      "metrics": {
+        "label": "ldg+cop@one-edge-degraded",
+        "duration_s": 60.0,
+        "num_events": 729989,
+        "completed_events": 729568,
+        "partition_info": {
+          "method": "ldg",
+          "edge_cut": 0.680161943319838,
+          "load_imbalance": 1.1,
+          "spatial_compactness": 29.412892987687638,
+          "sizes": [
+            2750.0,
+            2750.0,
+            2750.0,
+            1750.0
+          ]
+        },
+        "placement_info": {
+          "method": "cop",
+          "assignment": {
+            "feat_extract": "edge-0",
+            "risk_score": "edge-0",
+            "rule_check": "edge-0",
+            "conformal": "edge-0",
+            "audit": "edge-0"
+          }
+        },
+        "pipeline_info": {
+          "method": "abp"
+        },
+        "latency_ms": {
+          "mean": 61.07050635133933,
+          "p50": 51.326712166019206,
+          "p95": 68.34559692469394,
+          "p99": 74.93552022606508,
+          "max": 33289.64826014092
+        },
+        "throughput_ops": 12159.466666666667,
+        "cross_edge_bytes": 347676800.0,
+        "cloud_util": 0.0,
+        "edge_util": [
+          0.37871924940512103,
+          0.3813236820149628,
+          0.37776538920882285,
+          0.7117455227691575
+        ],
+        "rebalance_moves": 0,
+        "state_tier_hit_ratio": 0.947375,
+        "state_tier_avg_ms": 0.6057,
+        "state_tier_total_ms": 12375289.289
+      }
+    },
+    {
+      "profile": "one-edge-degraded",
+      "tflops_per_node": [
+        1.0,
+        1.0,
+        1.0,
+        0.3
+      ],
+      "spec": {
+        "label": "ldg+locaware",
+        "partition": "ldg",
+        "placement": "loc_aware",
+        "pipeline": "abp"
+      },
+      "metrics": {
+        "label": "ldg+locaware@one-edge-degraded",
+        "duration_s": 60.0,
+        "num_events": 729989,
+        "completed_events": 729568,
+        "partition_info": {
+          "method": "ldg",
+          "edge_cut": 0.680161943319838,
+          "load_imbalance": 1.1,
+          "spatial_compactness": 29.412892987687638,
+          "sizes": [
+            2750.0,
+            2750.0,
+            2750.0,
+            1750.0
+          ]
+        },
+        "placement_info": {
+          "method": "loc_aware",
+          "assignment": {
+            "feat_extract": "edge-0",
+            "risk_score": "edge-0",
+            "rule_check": "edge-0",
+            "conformal": "edge-0",
+            "audit": "edge-0"
+          }
+        },
+        "pipeline_info": {
+          "method": "abp"
+        },
+        "latency_ms": {
+          "mean": 61.07050635133933,
+          "p50": 51.326712166019206,
+          "p95": 68.34559692469394,
+          "p99": 74.93552022606508,
+          "max": 33289.64826014092
+        },
+        "throughput_ops": 12159.466666666667,
+        "cross_edge_bytes": 347676800.0,
+        "cloud_util": 0.0,
+        "edge_util": [
+          0.37871924940512103,
+          0.3813236820149628,
+          0.37776538920882285,
+          0.7117455227691575
+        ],
+        "rebalance_moves": 0,
+        "state_tier_hit_ratio": 0.947375,
+        "state_tier_avg_ms": 0.6057,
+        "state_tier_total_ms": 12375289.289
+      }
+    },
+    {
+      "profile": "one-edge-degraded",
+      "tflops_per_node": [
+        1.0,
+        1.0,
+        1.0,
+        0.3
+      ],
+      "spec": {
+        "label": "skygrid",
+        "partition": "stp",
+        "placement": "cop",
+        "pipeline": "abp"
+      },
+      "metrics": {
+        "label": "skygrid@one-edge-degraded",
+        "duration_s": 60.0,
+        "num_events": 729989,
+        "completed_events": 729526,
+        "partition_info": {
+          "method": "stp",
+          "edge_cut": 0.11740890688259109,
+          "load_imbalance": 1.63,
+          "spatial_compactness": 11.198685120231126,
+          "sizes": [
+            4075.0,
+            1895.0,
+            2761.0,
+            1269.0
+          ]
+        },
+        "placement_info": {
+          "method": "cop",
+          "assignment": {
+            "feat_extract": "edge-0",
+            "risk_score": "edge-0",
+            "rule_check": "edge-0",
+            "conformal": "edge-0",
+            "audit": "edge-0"
+          }
+        },
+        "pipeline_info": {
+          "method": "abp"
+        },
+        "latency_ms": {
+          "mean": 56.061288776678595,
+          "p50": 48.38706817165985,
+          "p95": 64.88135739639938,
+          "p99": 71.79614208233943,
+          "max": 19520.401313453644
+        },
+        "throughput_ops": 12158.766666666666,
+        "cross_edge_bytes": 137559680.0,
+        "cloud_util": 0.0,
+        "edge_util": [
+          0.48762516838723796,
+          0.2949282253556673,
+          0.38084616990698356,
+          0.6057871305561715
+        ],
+        "rebalance_moves": 0,
+        "state_tier_hit_ratio": 0.9472,
+        "state_tier_avg_ms": 0.6057,
+        "state_tier_total_ms": 12375473.421
+      }
+    },
+    {
+      "profile": "two-edges-degraded",
+      "tflops_per_node": [
+        1.0,
+        1.0,
+        0.5,
+        0.3
+      ],
+      "spec": {
+        "label": "ldg+static",
+        "partition": "ldg",
+        "placement": "static",
+        "pipeline": "abp"
+      },
+      "metrics": {
+        "label": "ldg+static@two-edges-degraded",
+        "duration_s": 60.0,
+        "num_events": 729989,
+        "completed_events": 729727,
+        "partition_info": {
+          "method": "ldg",
+          "edge_cut": 0.680161943319838,
+          "load_imbalance": 1.1,
+          "spatial_compactness": 29.412892987687638,
+          "sizes": [
+            2750.0,
+            2750.0,
+            2750.0,
+            1750.0
+          ]
+        },
+        "placement_info": {
+          "method": "static",
+          "assignment": {
+            "feat_extract": "cloud",
+            "risk_score": "cloud",
+            "rule_check": "edge-0",
+            "conformal": "edge-0",
+            "audit": "edge-0"
+          }
+        },
+        "pipeline_info": {
+          "method": "abp"
+        },
+        "latency_ms": {
+          "mean": 86.99422986549283,
+          "p50": 86.45300021856201,
+          "p95": 96.69082047956654,
+          "p99": 100.82324215944783,
+          "max": 835.9653198116648
+        },
+        "throughput_ops": 12162.116666666667,
+        "cross_edge_bytes": 1469053184.0,
+        "cloud_util": 0.44098512123873673,
+        "edge_util": [
+          0.009974482378497494,
+          0.009968345981617523,
+          0.019762830952764626,
+          0.0210142082452096
+        ],
+        "rebalance_moves": 0,
+        "state_tier_hit_ratio": 0.94685,
+        "state_tier_avg_ms": 0.6057,
+        "state_tier_total_ms": 12374172.378
+      }
+    },
+    {
+      "profile": "two-edges-degraded",
+      "tflops_per_node": [
+        1.0,
+        1.0,
+        0.5,
+        0.3
+      ],
+      "spec": {
+        "label": "ldg+cop",
+        "partition": "ldg",
+        "placement": "cop",
+        "pipeline": "abp"
+      },
+      "metrics": {
+        "label": "ldg+cop@two-edges-degraded",
+        "duration_s": 60.0,
+        "num_events": 729989,
+        "completed_events": 729735,
+        "partition_info": {
+          "method": "ldg",
+          "edge_cut": 0.680161943319838,
+          "load_imbalance": 1.1,
+          "spatial_compactness": 29.412892987687638,
+          "sizes": [
+            2750.0,
+            2750.0,
+            2750.0,
+            1750.0
+          ]
+        },
+        "placement_info": {
+          "method": "cop",
+          "assignment": {
+            "feat_extract": "edge-0",
+            "risk_score": "edge-0",
+            "rule_check": "edge-0",
+            "conformal": "edge-0",
+            "audit": "edge-0"
+          }
+        },
+        "pipeline_info": {
+          "method": "abp"
+        },
+        "latency_ms": {
+          "mean": 66.13020077784631,
+          "p50": 51.42229828851123,
+          "p95": 67.93158891024723,
+          "p99": 74.53519714820621,
+          "max": 33233.363277920726
+        },
+        "throughput_ops": 12162.25,
+        "cross_edge_bytes": 347673280.0,
+        "cloud_util": 0.0,
+        "edge_util": [
+          0.37883831468795537,
+          0.38168809883777755,
+          0.6331868668959878,
+          0.710086971340356
+        ],
+        "rebalance_moves": 0,
+        "state_tier_hit_ratio": 0.947375,
+        "state_tier_avg_ms": 0.6057,
+        "state_tier_total_ms": 12375630.904
+      }
+    },
+    {
+      "profile": "two-edges-degraded",
+      "tflops_per_node": [
+        1.0,
+        1.0,
+        0.5,
+        0.3
+      ],
+      "spec": {
+        "label": "ldg+locaware",
+        "partition": "ldg",
+        "placement": "loc_aware",
+        "pipeline": "abp"
+      },
+      "metrics": {
+        "label": "ldg+locaware@two-edges-degraded",
+        "duration_s": 60.0,
+        "num_events": 729989,
+        "completed_events": 729735,
+        "partition_info": {
+          "method": "ldg",
+          "edge_cut": 0.680161943319838,
+          "load_imbalance": 1.1,
+          "spatial_compactness": 29.412892987687638,
+          "sizes": [
+            2750.0,
+            2750.0,
+            2750.0,
+            1750.0
+          ]
+        },
+        "placement_info": {
+          "method": "loc_aware",
+          "assignment": {
+            "feat_extract": "edge-0",
+            "risk_score": "edge-0",
+            "rule_check": "edge-0",
+            "conformal": "edge-0",
+            "audit": "edge-0"
+          }
+        },
+        "pipeline_info": {
+          "method": "abp"
+        },
+        "latency_ms": {
+          "mean": 66.13020077784631,
+          "p50": 51.42229828851123,
+          "p95": 67.93158891024723,
+          "p99": 74.53519714820621,
+          "max": 33233.363277920726
+        },
+        "throughput_ops": 12162.25,
+        "cross_edge_bytes": 347673280.0,
+        "cloud_util": 0.0,
+        "edge_util": [
+          0.37883831468795537,
+          0.38168809883777755,
+          0.6331868668959878,
+          0.710086971340356
+        ],
+        "rebalance_moves": 0,
+        "state_tier_hit_ratio": 0.947375,
+        "state_tier_avg_ms": 0.6057,
+        "state_tier_total_ms": 12375630.904
+      }
+    },
+    {
+      "profile": "two-edges-degraded",
+      "tflops_per_node": [
+        1.0,
+        1.0,
+        0.5,
+        0.3
+      ],
+      "spec": {
+        "label": "skygrid",
+        "partition": "stp",
+        "placement": "cop",
+        "pipeline": "abp"
+      },
+      "metrics": {
+        "label": "skygrid@two-edges-degraded",
+        "duration_s": 60.0,
+        "num_events": 729989,
+        "completed_events": 729670,
+        "partition_info": {
+          "method": "stp",
+          "edge_cut": 0.09716599190283401,
+          "load_imbalance": 1.7856,
+          "spatial_compactness": 12.26323171845779,
+          "sizes": [
+            4464.0,
+            2202.0,
+            2232.0,
+            1102.0
+          ]
+        },
+        "placement_info": {
+          "method": "cop",
+          "assignment": {
+            "feat_extract": "edge-0",
+            "risk_score": "edge-0",
+            "rule_check": "edge-0",
+            "conformal": "edge-0",
+            "audit": "edge-0"
+          }
+        },
+        "pipeline_info": {
+          "method": "abp"
+        },
+        "latency_ms": {
+          "mean": 59.171171410092214,
+          "p50": 48.039698805685475,
+          "p95": 64.26039321569586,
+          "p99": 71.51270540865134,
+          "max": 23938.637559670642
+        },
+        "throughput_ops": 12161.166666666666,
+        "cross_edge_bytes": 134390048.0,
+        "cloud_util": 0.0,
+        "edge_util": [
+          0.5164456560241608,
+          0.32165806334694697,
+          0.5647124901671862,
+          0.5680012509541831
+        ],
+        "rebalance_moves": 354,
+        "state_tier_hit_ratio": 0.947075,
+        "state_tier_avg_ms": 0.6057,
+        "state_tier_total_ms": 12376151.806
+      }
+    },
+    {
+      "profile": "one-edge-failed",
+      "tflops_per_node": [
+        1.0,
+        1.0,
+        1.0,
+        0.05
+      ],
+      "spec": {
+        "label": "ldg+static",
+        "partition": "ldg",
+        "placement": "static",
+        "pipeline": "abp"
+      },
+      "metrics": {
+        "label": "ldg+static@one-edge-failed",
+        "duration_s": 60.0,
+        "num_events": 729989,
+        "completed_events": 729607,
+        "partition_info": {
+          "method": "ldg",
+          "edge_cut": 0.680161943319838,
+          "load_imbalance": 1.1,
+          "spatial_compactness": 29.412892987687638,
+          "sizes": [
+            2750.0,
+            2750.0,
+            2750.0,
+            1750.0
+          ]
+        },
+        "placement_info": {
+          "method": "static",
+          "assignment": {
+            "feat_extract": "cloud",
+            "risk_score": "cloud",
+            "rule_check": "edge-0",
+            "conformal": "edge-0",
+            "audit": "edge-0"
+          }
+        },
+        "pipeline_info": {
+          "method": "abp"
+        },
+        "latency_ms": {
+          "mean": 87.71193334011173,
+          "p50": 86.68354817260843,
+          "p95": 96.92070474737265,
+          "p99": 100.98035170460486,
+          "max": 4019.7746167744554
+        },
+        "throughput_ops": 12160.116666666667,
+        "cross_edge_bytes": 1469059328.0,
+        "cloud_util": 0.4409843499467718,
+        "edge_util": [
+          0.009974193420696567,
+          0.009969251638267937,
+          0.00992987862285563,
+          0.11981934036395167
+        ],
+        "rebalance_moves": 0,
+        "state_tier_hit_ratio": 0.94685,
+        "state_tier_avg_ms": 0.6057,
+        "state_tier_total_ms": 12374191.761
+      }
+    },
+    {
+      "profile": "one-edge-failed",
+      "tflops_per_node": [
+        1.0,
+        1.0,
+        1.0,
+        0.05
+      ],
+      "spec": {
+        "label": "ldg+cop",
+        "partition": "ldg",
+        "placement": "cop",
+        "pipeline": "abp"
+      },
+      "metrics": {
+        "label": "ldg+cop@one-edge-failed",
+        "duration_s": 60.0,
+        "num_events": 729989,
+        "completed_events": 729679,
+        "partition_info": {
+          "method": "ldg",
+          "edge_cut": 0.680161943319838,
+          "load_imbalance": 1.1,
+          "spatial_compactness": 29.412892987687638,
+          "sizes": [
+            2750.0,
+            2750.0,
+            2750.0,
+            1750.0
+          ]
+        },
+        "placement_info": {
+          "method": "cop",
+          "assignment": {
+            "feat_extract": "edge-0",
+            "risk_score": "edge-0",
+            "rule_check": "edge-0",
+            "conformal": "edge-0",
+            "audit": "edge-0"
+          }
+        },
+        "pipeline_info": {
+          "method": "abp"
+        },
+        "latency_ms": {
+          "mean": 30775.232470537696,
+          "p50": 53.37760815249203,
+          "p95": 215505.62042835765,
+          "p99": 228248.9178807861,
+          "max": 231287.97688690986
+        },
+        "throughput_ops": 12161.316666666668,
+        "cross_edge_bytes": 333594560.0,
+        "cloud_util": 0.0,
+        "edge_util": [
+          0.380603385174598,
+          0.3792669900211813,
+          0.379355958917021,
+          0.9999302592187539
+        ],
+        "rebalance_moves": 0,
+        "state_tier_hit_ratio": 0.947725,
+        "state_tier_avg_ms": 0.6057,
+        "state_tier_total_ms": 11798263.127
+      }
+    },
+    {
+      "profile": "one-edge-failed",
+      "tflops_per_node": [
+        1.0,
+        1.0,
+        1.0,
+        0.05
+      ],
+      "spec": {
+        "label": "ldg+locaware",
+        "partition": "ldg",
+        "placement": "loc_aware",
+        "pipeline": "abp"
+      },
+      "metrics": {
+        "label": "ldg+locaware@one-edge-failed",
+        "duration_s": 60.0,
+        "num_events": 729989,
+        "completed_events": 729679,
+        "partition_info": {
+          "method": "ldg",
+          "edge_cut": 0.680161943319838,
+          "load_imbalance": 1.1,
+          "spatial_compactness": 29.412892987687638,
+          "sizes": [
+            2750.0,
+            2750.0,
+            2750.0,
+            1750.0
+          ]
+        },
+        "placement_info": {
+          "method": "loc_aware",
+          "assignment": {
+            "feat_extract": "edge-0",
+            "risk_score": "edge-0",
+            "rule_check": "edge-0",
+            "conformal": "edge-0",
+            "audit": "edge-0"
+          }
+        },
+        "pipeline_info": {
+          "method": "abp"
+        },
+        "latency_ms": {
+          "mean": 30775.232470537696,
+          "p50": 53.37760815249203,
+          "p95": 215505.62042835765,
+          "p99": 228248.9178807861,
+          "max": 231287.97688690986
+        },
+        "throughput_ops": 12161.316666666668,
+        "cross_edge_bytes": 333594560.0,
+        "cloud_util": 0.0,
+        "edge_util": [
+          0.380603385174598,
+          0.3792669900211813,
+          0.379355958917021,
+          0.9999302592187539
+        ],
+        "rebalance_moves": 0,
+        "state_tier_hit_ratio": 0.947725,
+        "state_tier_avg_ms": 0.6057,
+        "state_tier_total_ms": 11798263.127
+      }
+    },
+    {
+      "profile": "one-edge-failed",
+      "tflops_per_node": [
+        1.0,
+        1.0,
+        1.0,
+        0.05
+      ],
+      "spec": {
+        "label": "skygrid",
+        "partition": "stp",
+        "placement": "cop",
+        "pipeline": "abp"
+      },
+      "metrics": {
+        "label": "skygrid@one-edge-failed",
+        "duration_s": 60.0,
+        "num_events": 729989,
+        "completed_events": 729655,
+        "partition_info": {
+          "method": "stp",
+          "edge_cut": 0.09716599190283401,
+          "load_imbalance": 1.816,
+          "spatial_compactness": 10.514708284042042,
+          "sizes": [
+            4540.0,
+            2216.0,
+            3017.0,
+            227.0
+          ]
+        },
+        "placement_info": {
+          "method": "cop",
+          "assignment": {
+            "feat_extract": "edge-0",
+            "risk_score": "edge-0",
+            "rule_check": "edge-0",
+            "conformal": "edge-0",
+            "audit": "edge-0"
+          }
+        },
+        "pipeline_info": {
+          "method": "abp"
+        },
+        "latency_ms": {
+          "mean": 60.926686882872126,
+          "p50": 47.81272933620494,
+          "p95": 64.80322118253218,
+          "p99": 101.07602306926003,
+          "max": 21196.919444674342
+        },
+        "throughput_ops": 12160.916666666666,
+        "cross_edge_bytes": 121715072.0,
+        "cloud_util": 0.0,
+        "edge_util": [
+          0.5186926379126928,
+          0.3246573001381196,
+          0.40283567248469476,
+          0.7439923631919222
+        ],
+        "rebalance_moves": 29,
+        "state_tier_hit_ratio": 0.94475,
+        "state_tier_avg_ms": 0.6057,
+        "state_tier_total_ms": 12375475.844999999
+      }
+    }
+  ]
+}
