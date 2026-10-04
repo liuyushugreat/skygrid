@@ -1,0 +1,20 @@
+[dag-variants] dag_wide_sym     ldg+static  seed=20260928 p99=86.57ms xedge=1468.8MB tput=12164.2ops/s
+[dag-variants] dag_wide_sym     ldg+cop     seed=20260928 p99=71.99ms xedge=347.7MB tput=12162.3ops/s
+[dag-variants] dag_wide_sym     skygrid     seed=20260928 p99=69.73ms xedge=149.7MB tput=12163.8ops/s
+[dag-variants] dag_wide_sym     ldg+static  seed=20260929 p99=85.13ms xedge=1930.4MB tput=15999.6ops/s
+[dag-variants] dag_wide_sym     ldg+cop     seed=20260929 p99=70.54ms xedge=455.7MB tput=15998.9ops/s
+[dag-variants] dag_wide_sym     skygrid     seed=20260929 p99=68.39ms xedge=193.1MB tput=16000.2ops/s
+[dag-variants] dag_wide_sym     ldg+static  seed=20260930 p99=86.03ms xedge=1649.5MB tput=13662.1ops/s
+[dag-variants] dag_wide_sym     ldg+cop     seed=20260930 p99=71.51ms xedge=390.1MB tput=13663.1ops/s
+[dag-variants] dag_wide_sym     skygrid     seed=20260930 p99=69.67ms xedge=179.0MB tput=13663.3ops/s
+[dag-variants] dag_branching    ldg+static  seed=20260928 p99=93.39ms xedge=1508.3MB tput=12161.5ops/s
+[dag-variants] dag_branching    ldg+cop     seed=20260928 p99=64.43ms xedge=347.7MB tput=12162.0ops/s
+[dag-variants] dag_branching    skygrid     seed=20260928 p99=61.51ms xedge=149.7MB tput=12161.3ops/s
+[dag-variants] dag_branching    ldg+static  seed=20260929 p99=90.60ms xedge=1983.8MB tput=15999.6ops/s
+[dag-variants] dag_branching    ldg+cop     seed=20260929 p99=63.81ms xedge=455.7MB tput=15998.1ops/s
+[dag-variants] dag_branching    skygrid     seed=20260929 p99=60.71ms xedge=193.1MB tput=16001.1ops/s
+[dag-variants] dag_branching    ldg+static  seed=20260930 p99=92.18ms xedge=1694.1MB tput=13662.4ops/s
+[dag-variants] dag_branching    ldg+cop     seed=20260930 p99=64.20ms xedge=390.1MB tput=13663.8ops/s
+[dag-variants] dag_branching    skygrid     seed=20260930 p99=61.14ms xedge=179.0MB tput=13663.7ops/s
+
+[dag-variants] wrote outputs/dag_variants/dag_variants.json

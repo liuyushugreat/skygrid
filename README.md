@@ -118,9 +118,11 @@ make test-skygrid
 | `scripts/run_validation.py` | Cost-model validation |
 | `scripts/run_pipeline_stress.py` | ABP vs. synchronous under bursty load |
 | `scripts/run_placement_stress.py` | State-tier-aware COP-H vs. tier-blind LocAware |
+| `scripts/run_dag_variants.py` | Structural DAG variants (`configs/dag_wide_sym.yaml`, `configs/dag_branching.yaml`), Sec. "Other DAG Structures" (`make dag-variants`) |
 | `scripts/plot_results.py` | Regenerate figures from JSON metrics |
+| `scripts/plot_paper_figs.py` | Camera-ready scaling / degradation figures with embedded TrueType fonts (`make paper-figs`) |
 
-Default seed and fabric parameters are pinned in `SkyGrid_spark/configs/*.yaml` for bit-stable reproduction on a single CPU core.
+Default seed and fabric parameters are pinned in `SkyGrid_spark/configs/*.yaml` for bit-stable reproduction on a single CPU core. Result files used by the paper are checked in under `SkyGrid_spark/outputs/` (including `outputs/dag_variants/dag_variants.json`).
 
 ---
 

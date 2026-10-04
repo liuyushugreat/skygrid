@@ -1,8 +1,16 @@
-.PHONY: all main multiseed ablation scaling fault validation pipeline-stress placement-stress figures test
+.PHONY: all main multiseed ablation scaling fault validation pipeline-stress placement-stress dag-variants figures paper-figs test
 
 PYTHON ?= python
 
-all: main multiseed ablation scaling fault validation pipeline-stress placement-stress figures
+all: main multiseed ablation scaling fault validation pipeline-stress placement-stress dag-variants figures
+
+# Sec. V-F "Other DAG Structures": two structural DAG variants, 3 seeds.
+dag-variants:
+	$(PYTHON) scripts/run_dag_variants.py --configs configs/dag_wide_sym.yaml configs/dag_branching.yaml --seeds 20260928 20260929 20260930 --out outputs/dag_variants/dag_variants.json
+
+# Camera-ready paper figures (TrueType fonts, IEEE-compliant).
+paper-figs:
+	$(PYTHON) scripts/plot_paper_figs.py --out-dir outputs/paper_figs
 
 main:
 	$(PYTHON) scripts/run_experiment.py --config configs/default.yaml --output outputs/metrics.json
